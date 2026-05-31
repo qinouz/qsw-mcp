@@ -6,7 +6,7 @@ import sharp from "sharp";
 import fs from "fs/promises";
 import path from "path";
 import { execSync } from "child_process";
-import { logger } from "../utils/logger.js";
+import { logger, MCP_ROOT } from "../utils/logger.js";
 
 export function registerReadImageTool(server: McpServer) {
   server.tool(
@@ -28,8 +28,8 @@ export function registerReadImageTool(server: McpServer) {
       try {
         logger.info("从剪贴板读取图片");
 
-        // 保存到项目 clipboard 目录
-        const clipboardDir = path.join(process.cwd(), "clipboard");
+        // 保存到 MCP 服务器的 clipboard 目录
+        const clipboardDir = path.join(MCP_ROOT, "clipboard");
         await fs.mkdir(clipboardDir, { recursive: true });
 
         const timestamp = new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19);

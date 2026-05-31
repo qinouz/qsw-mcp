@@ -2,6 +2,7 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
 
 export enum LogLevel {
   DEBUG = 0,
@@ -10,8 +11,13 @@ export enum LogLevel {
   ERROR = 3,
 }
 
-// 日志目录
-const LOG_DIR = path.join(process.cwd(), "logs");
+// 获取 MCP 服务器所在目录（dist/utils/ -> 上两级到项目根目录）
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+export const MCP_ROOT = path.resolve(__dirname, "../..");
+
+// 日志目录（固定在 MCP 服务器目录下）
+const LOG_DIR = path.join(MCP_ROOT, "logs");
 
 // 获取北京时间
 function getBeijingTime(): Date {
