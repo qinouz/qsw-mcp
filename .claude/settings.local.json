@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__qsw-mcp__read_url"
+    ]
+  }
+}
